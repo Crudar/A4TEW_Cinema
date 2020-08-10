@@ -13,7 +13,7 @@
 @endif
 
 <div class="container">
-    <form action="{{ route('movies.store')}}" method="post">
+    <form action="{{ route('movies.index')}}" method="post">
         @csrf
         <div class="form-group">
             <label for="name">Title</label>
@@ -40,7 +40,7 @@
             <input type="text" class="form-control" name="actors" id="actors" aria-describedby="helpId" placeholder="">
         </div>
 
-        <button type="submit" class="btn btn-primary">Potvrď</button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>
 @endsection

@@ -20,6 +20,20 @@ class ScreeningController extends Controller
         ->join('movies', 'screenings.movie_id', '=', 'movies.id')
         ->orderBy('start_time')
         ->get();
+
+        //Dokoncit pocet rezervacii
+        // select screening_id from screenings inner join reservations on screenings.id = reservations.screening_id where screenings.id = 1;
+        //$screenings->put('nOfReservations',0);
+
+        foreach ($screenings as $screening) {
+            $nOfReservations = DB::table('screenings')->select('screening_id')
+            ->join('reservations', 'screenings.id', '=', 'reservations.screening_id')
+            ->where('screenings.id', $screening->id)
+            ->count();
+
+            $screening->nOfReservations = $nOfReservations;
+        }
+        //dd($screenings);
         return view('screenings.index', [ 'screenings' => $screenings ]);
     }
 

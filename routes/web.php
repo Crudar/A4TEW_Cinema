@@ -15,13 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
+
+Route::get('/home', 'HomeController@index');
 
 Route::get('admin', 'HomeController@adminHome')->middleware('admin');
 
 Route::resource('movies', 'MovieController')->middleware('admin');
-Route::resource('screenings', 'ScreeningController');
-Route::resource('reservations', 'ReservationController');
-
-
-Route::get('screenings/create', 'ScreeningController@create')->middleware('admin');
+Route::resource('screenings', 'ScreeningController')->middleware('auth');
+Route::resource('reservations', 'ReservationController')->middleware('auth');

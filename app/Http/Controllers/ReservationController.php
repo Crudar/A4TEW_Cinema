@@ -28,7 +28,7 @@ class ReservationController extends Controller
         ->join('movies', 'screenings.movie_id', '=', 'movies.id')
         ->join('reservations', 'screenings.id', '=', 'reservations.screening_id')
         ->join('users', 'reservations.user_id', '=', 'users.id')
-        ->orderBy('start_time','desc','users.id','desc')
+        ->orderBy('start_time','asc','users.id','asc')
         ->get();
         return view('reservations.index', [ 'reservations' => $reservations, 'allReservations' => $allReservations ]);
     }
